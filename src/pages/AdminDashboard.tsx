@@ -537,9 +537,14 @@ const AdminDashboard = () => {
             console.warn('Rental status not properly updated in database, refreshing data');
             // If the database wasn't properly updated, refresh the rental data
             await refreshRentalData();
+          } else {
+            // Database update succeeded - rental should stay removed from UI
+            console.log('Rental status successfully updated to completed in database');
           }
         } catch (verifyError) {
           console.error('Error verifying rental status:', verifyError);
+          // Only refresh if there was an error fetching the verification data
+          await refreshRentalData();
         }
       }, 500);
       
@@ -691,9 +696,14 @@ const AdminDashboard = () => {
             console.warn('Rental status not properly updated in database, refreshing data');
             // If the database wasn't properly updated, refresh the rental data
             await refreshRentalData();
+          } else {
+            // Database update succeeded - rental should stay removed from UI
+            console.log('Rental status successfully updated to completed in database');
           }
         } catch (verifyError) {
           console.error('Error verifying rental status:', verifyError);
+          // Only refresh if there was an error fetching the verification data
+          await refreshRentalData();
         }
       }, 500);
     } catch (error) {
